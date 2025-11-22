@@ -1,51 +1,77 @@
 ﻿using System.Text;
-
+using static Raylib_cs.Raylib;
 namespace Raylib_cs
 {
   internal static class Program
   {
     static readonly int WindowWidth = 800;
     static readonly int WindowHeight = 600;
-    static readonly string text = "fuck you";
-    static readonly int fontSize = 100;
+    static string txtWrited = "hola.txt";
 
     [System.MTAThread]
     public static void Main()
     {
-      Raylib.InitWindow(WindowWidth,WindowHeight, "Oh my gaahhhh");
-      var a = Raylib.MeasureText(text, fontSize);
+      InitWindow(WindowWidth,WindowHeight, "Oh my gaahhhh");
       int fSize = 50;
       StringBuilder stringBuilded = new();
-      Font f = Raylib.LoadFontEx("MonogramExtendedItalic.ttf", fSize, null, 0);
-      Rectangle r = new(WindowWidth/2-a/2, WindowHeight/2-fontSize/2, a, fontSize);
-      Raylib.SetTargetFPS(60);
+      Font f = LoadFontEx("MonogramExtendedItalic.ttf", fSize, null, 0);
+      Texture2D texture = LoadTexture("grandma.png");
+      SetTargetFPS(60);
+      int enters = 0;
+      using(var st = new StreamReader(txtWrited))
+      {
+        stringBuilded.Append(st.ReadLine());
+      }
+
       while(!Raylib.WindowShouldClose())
       {
-        Raylib.BeginDrawing();
-        Raylib.ClearBackground(Color.Black);
+        BeginDrawing();
+        ClearBackground(Color.Black);
+        DrawTexture(texture, 100, 100, Color.White);
 
-        DrawRectangle(r, Color.Gray);
-        int al = Raylib.GetCharPressed();
+        int al = GetCharPressed();
         if(al > 0)
         {
           stringBuilded.Append((char)al);
         }
-        if(Raylib.IsKeyPressed(KeyboardKey.Backspace) && stringBuilded.Length > 0)
+        if(IsKeyPressed(KeyboardKey.Backspace) && stringBuilded.Length > 0)
         {
           stringBuilded.Remove(stringBuilded.Length-1, 1);
         }
-        if(Raylib.IsKeyPressed(KeyboardKey.Enter))
+        if(IsKeyPressed(KeyboardKey.Enter))
         {
           stringBuilded.Append("\n");
+          enters ++;
         }
-
-        Raylib.DrawText(text, WindowWidth/2-a/2, WindowHeight/2-fontSize/2, fontSize, Color.White);
-
-        Raylib.DrawTextEx(f, stringBuilded.ToString(), new(0,0), fSize, 0, Color.White);
+        DrawText(stringBuilded.ToString(), 0, 0, fSize, Color.White);
+        string aa = stringBuilded.ToString().Split('\n').Last();
+        int p = MeasureText(aa, fSize);
+        if(p>WindowWidth)
+        {
+          for(int i = stringBuilded.Length - 1; i >= 0; i--)
+          {
+            if(stringBuilded[i].Equals(' '))
+            {
+              stringBuilded[i] = '\n';
+              enters++;
+              break;
+            }
+          }
+        }
+        DrawRectangle(new(p, enters*fSize+1, 20, fSize), Color.White);
+        string t = $"{Raylib.GetFPS()}";
 
         Raylib.EndDrawing();
       }
-      Raylib.CloseWindow();
+      if(!File.Exists(txtWrited))
+      {
+        File.Create(txtWrited);
+      }
+      using(StreamWriter stream = new StreamWriter(txtWrited, false))
+      {
+        stream.WriteLine(stringBuilded.ToString());
+      }
+      CloseWindow();
     }
     public static void DrawRectangle(Rectangle r, Color color)
     {
