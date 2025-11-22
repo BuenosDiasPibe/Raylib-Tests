@@ -7,12 +7,13 @@ namespace Raylib_cs
     static readonly int WindowWidth = 800;
     static readonly int WindowHeight = 600;
     static string txtWrited = "hola.txt";
+    static int lineSpacing = 0;
+    static int fSize = 50;
 
     [System.MTAThread]
     public static void Main()
     {
       InitWindow(WindowWidth,WindowHeight, "Oh my gaahhhh");
-      int fSize = 50;
       StringBuilder stringBuilded = new();
       Font f = LoadFontEx("MonogramExtendedItalic.ttf", fSize, null, 0);
       Texture2D texture = LoadTexture("grandma.png");
@@ -20,13 +21,15 @@ namespace Raylib_cs
       int enters = 0;
       using(var st = new StreamReader(txtWrited))
       {
-        stringBuilded.Append(st.ReadLine());
+        stringBuilded.Append(st.ReadToEnd());
       }
+      int vertical = 0;
+      SetTextLineSpacing(lineSpacing);
 
       while(!Raylib.WindowShouldClose())
       {
         BeginDrawing();
-        ClearBackground(Color.Black);
+        ClearBackground(GetColor(0x181818FF));
         DrawTexture(texture, 100, 100, Color.White);
 
         int al = GetCharPressed();
@@ -41,9 +44,14 @@ namespace Raylib_cs
         if(IsKeyPressed(KeyboardKey.Enter))
         {
           stringBuilded.Append("\n");
-          enters ++;
+          enters++;
         }
-        DrawText(stringBuilded.ToString(), 0, 0, fSize, Color.White);
+        if((fSize+lineSpacing)*(enters-1)+vertical >= WindowHeight-fSize)
+        {
+          vertical++;
+          enters--;
+        }
+        DrawText(stringBuilded.ToString(), 0, -(fSize*vertical), fontSize: fSize, Color.White);
         string aa = stringBuilded.ToString().Split('\n').Last();
         int p = MeasureText(aa, fSize);
         if(p>WindowWidth)
@@ -58,8 +66,9 @@ namespace Raylib_cs
             }
           }
         }
-        DrawRectangle(new(p, enters*fSize+1, 20, fSize), Color.White);
-        string t = $"{Raylib.GetFPS()}";
+        DrawRectangle(new(p, y: enters*(fSize+lineSpacing), 20, fSize), Color.White);
+        string ta = $"v: {vertical}\ne: {enters}";
+        DrawText(ta, WindowWidth-MeasureText(ta, fSize), WindowHeight-100, 50, GetColor(0x404040FF));
 
         Raylib.EndDrawing();
       }

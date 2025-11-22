@@ -43,3 +43,4 @@
 /home/clumpl/Documentos/Programacion/Raylib-Tests/obj/Debug/net9.0/Raylib-T.A97FA277.Up2Date
 /home/clumpl/Documentos/Programacion/Raylib-Tests/obj/Debug/net9.0/Raylib-Test.genruntimeconfig.cache
 /home/clumpl/Documentos/Programacion/Raylib-Tests/obj/Debug/net9.0/ref/Raylib-Test.dll
+/home/clumpl/Documentos/Raylib-Test/obj/Debug/net9.0/Raylib-Test.sourcelink.json
