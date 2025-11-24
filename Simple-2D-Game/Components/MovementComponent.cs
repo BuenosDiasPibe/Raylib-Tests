@@ -4,7 +4,7 @@ namespace Simple_2D_Game
 {
   public class MovementComponent : Component
   {
-    public float max_velocity = 10;
+    public float max_velocity = 5;
 
     public override void Update()
     {
