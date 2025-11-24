@@ -14,6 +14,9 @@ namespace Simple_2D_Game
     { return sceneManager.Peek(); }
 
     public void RemoveScene()
-    { sceneManager.Pop(); }
+    {
+      sceneManager.Pop();
+      sceneManager.Peek().LoadContent();
+    }
   }
 }

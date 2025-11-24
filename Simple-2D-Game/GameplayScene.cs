@@ -3,12 +3,23 @@ namespace Simple_2D_Game
 {
   public class GameplayScene : Scene
   {
+    float timePassed;
+    TimeSpan time;
+
     Entity player = new();
     Entity enemy = new();
     Ball ball = new();
+    GameOverScene gameOver;
+    SceneManager sm;
+    public GameplayScene(SceneManager sm)
+    {
+      this.sm = sm;
+      gameOver = new(sm);
+    }
 
     public void LoadContent()
     {
+      timePassed = 0;
       player = new(
           new(20, Const.WindowHeight/2-50, 25, 100),
           Color.White
@@ -31,7 +42,7 @@ namespace Simple_2D_Game
     public void UnloadContent()
     { }
 
-    public void Update()
+    public void Update(float deltaTime)
     {
       ball.Update();
 
@@ -64,10 +75,7 @@ namespace Simple_2D_Game
       );
       if(ball.intersects(ball, player.DestinationRectangle))
       {
-        if(ball.position.X < player.DestinationRectangle.X + player.DestinationRectangle.Width/12)
-        {
-          ball.position.X = player.DestinationRectangle.X+player.DestinationRectangle.Width+ball.radious;
-        }
+        ball.position.X = player.DestinationRectangle.X+player.DestinationRectangle.Width+ball.radious;
         Random rn = new();
         ball.velocity_vector.X *= (float)(-1 - rn.NextDouble()/8);
         ball.velocity_vector.Y *= (float)(-1 - rn.NextDouble()/8);
@@ -75,10 +83,7 @@ namespace Simple_2D_Game
       }
       if(ball.intersects(ball, enemy.DestinationRectangle))
       {
-        if(ball.position.X > enemy.DestinationRectangle.X + enemy.DestinationRectangle.Width/12)
-        {
-          ball.position.X = enemy.DestinationRectangle.X-enemy.DestinationRectangle.Width-ball.radious;
-        }
+        ball.position.X = enemy.DestinationRectangle.X-enemy.DestinationRectangle.Width-ball.radious;
         Random rn = new();
         ball.velocity_vector.X *= (float)(-1 - rn.NextDouble()/8);
         ball.velocity_vector.Y *= (float)(-1 - rn.NextDouble()/8);
@@ -86,8 +91,14 @@ namespace Simple_2D_Game
       }
 
       ball.play_sound();
+      timePassed+= deltaTime;
+      time = TimeSpan.FromSeconds(timePassed);
+      if(time.Seconds >= 30)
+      {
+        sm.AddScene(gameOver);
+      }
     }
-    public void Draw()
+    public void Draw(float deltaTime)
     {
       player.Draw();
       enemy.Draw();
@@ -96,6 +107,10 @@ namespace Simple_2D_Game
       string texxt = $"p: {Globals.player_points} / e: {Globals.enemy_points}";
       int texxt_width = Raylib.MeasureText(texxt, 40);
       Raylib.DrawText(texxt, Const.WindowWidth/2 - texxt_width/2, 30, 40, Raylib.GetColor(0x504945FF));
+
+      string timea = $"time: {time.Seconds}";
+      int texxt_time = Raylib.MeasureText(timea, 40);
+      Raylib.DrawText(timea, Const.WindowWidth/2 - texxt_time/2, 30+40, 30, Raylib.GetColor(0x504945FF));
     }
   }
 }

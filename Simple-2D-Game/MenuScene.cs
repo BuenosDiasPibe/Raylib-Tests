@@ -68,7 +68,7 @@ namespace Simple_2D_Game
     }
 
     bool stateClick = false;
-    public void Update()
+    public void Update(float deltaTime)
     {
       buttonColor = Raylib.GetColor(0x458588FF);
       buttonTextColor = Color.White;
@@ -79,13 +79,13 @@ namespace Simple_2D_Game
         buttonTextColor = Raylib.GetColor(0x282828FF);
         if(Raylib.IsMouseButtonUp(MouseButton.Left) && stateClick)
         {
-          sm.AddScene(new GameplayScene());
+          sm.AddScene(new GameplayScene(sm));
         }
       }
       stateClick = Raylib.IsMouseButtonDown(MouseButton.Left);
     }
 
-    public void Draw()
+    public void Draw(float deltaTime)
     {
       Raylib.DrawRectangleRec(titleRec, titleColor);
       Raylib.DrawText(Title, (int)titlePosition.X, (int)titlePosition.Y, TitleSize, Color.White);

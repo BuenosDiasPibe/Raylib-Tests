@@ -9,18 +9,19 @@ namespace Simple_2D_Game
       Raylib.InitWindow(Const.WindowWidth, Const.WindowHeight, "Simple Game"); // this is the "LoadContent" part
       Raylib.InitAudioDevice();
       SceneManager sceneManager = new();
-      sceneManager.AddScene(new MenuScene(sceneManager));
-      //sceneManager.AddScene(new GameplayScene());
+      //sceneManager.AddScene(new MenuScene(sceneManager));
+      sceneManager.AddScene(new GameOverScene(sceneManager));
 
       Raylib.SetTargetFPS(Const.FPS);
       while(!Raylib.WindowShouldClose()) // this is the "Update" part
       {
-        sceneManager.GetScene().Update();
+        float deltaTime = Raylib.GetFrameTime();
+        sceneManager.GetScene().Update(deltaTime);
 
         Raylib.ClearBackground(Raylib.GetColor(0x1d2021FF)); // this is the "Draw" part
         Raylib.BeginDrawing();
 
-        sceneManager.GetScene().Draw();
+        sceneManager.GetScene().Draw(deltaTime);
 
         Raylib.EndDrawing();
       }
