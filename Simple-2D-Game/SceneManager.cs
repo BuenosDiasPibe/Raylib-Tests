@@ -15,6 +15,11 @@ namespace Simple_2D_Game
 
     public void RemoveScene()
     {
+      if(sceneManager.Count == 1)
+      {
+        Console.WriteLine("helloo");
+        throw new System.InvalidOperationException("you have only one scene");
+      }
       sceneManager.Pop();
       sceneManager.Peek().LoadContent();
     }

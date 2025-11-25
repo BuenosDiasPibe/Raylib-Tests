@@ -9,8 +9,7 @@ namespace Simple_2D_Game
       Raylib.InitWindow(Const.WindowWidth, Const.WindowHeight, "Simple Game"); // this is the "LoadContent" part
       Raylib.InitAudioDevice();
       SceneManager sceneManager = new();
-      //sceneManager.AddScene(new MenuScene(sceneManager));
-      sceneManager.AddScene(new GameOverScene(sceneManager));
+      sceneManager.AddScene(new MenuScene(sceneManager));
 
       Raylib.SetTargetFPS(Const.FPS);
       while(!Raylib.WindowShouldClose()) // this is the "Update" part

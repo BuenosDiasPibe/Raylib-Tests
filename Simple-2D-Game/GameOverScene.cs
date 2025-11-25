@@ -5,19 +5,19 @@ namespace Simple_2D_Game
   public class GameOverScene : Scene
   {
     private SceneManager manager;
-    private GameplayScene reference;
+    //private GameplayScene reference;
 
     static int padding = 10;
 
     private string finalScore = "";
     Vector2 finalScorePosition = new();
-    int finalScoreSize = 40;
+    int finalScoreSize = 80;
     Color finalScoreColor;
     
     private string goBack = "Restart";
     Rectangle goBackRec = new();
     Vector2 goBackPosition = new();
-    readonly int goBackSize = 20;
+    readonly int goBackSize = 30;
     static Color goBackColor;
     static Color goBackTextColor;
 
@@ -47,7 +47,7 @@ namespace Simple_2D_Game
       goBackRec = new(
           goBackPosition.X - padding/2,
           goBackPosition.Y - padding/2,
-          Raylib.MeasureText(goBack, goBackSize) + padding/2,
+          Raylib.MeasureText(goBack, goBackSize) + padding,
           goBackSize + padding/2
       );
       goBackColor = Raylib.GetColor(0x776655FF);
@@ -57,19 +57,42 @@ namespace Simple_2D_Game
     public void UnloadContent()
     { }
 
+    bool stateClick = false;
     public void Update(float deltaTime)
     {
-      if(Raylib.IsKeyPressed(KeyboardKey.Q))
+      goBackColor = Raylib.GetColor(0x458588FF);
+      goBackTextColor = Color.White;
+      Vector2 mPos = Raylib.GetMousePosition();
+      if(Utils.intersectPoint(goBackRec, mPos))
       {
-        manager.RemoveScene();
+        goBackColor = Raylib.GetColor(0xd3869bFF);
+        goBackTextColor = Raylib.GetColor(0x282828FF);
+        if(Raylib.IsMouseButtonUp(MouseButton.Left) && stateClick)
+        {
+          manager.RemoveScene();
+        }
       }
+      stateClick = Raylib.IsMouseButtonDown(MouseButton.Left);
+
+      if(Raylib.IsKeyPressed(KeyboardKey.Q))
+      { manager.RemoveScene(); }
     }
     public void Draw(float deltaTime)
     {
-      Raylib.DrawText(finalScore, (int)finalScorePosition.X, (int)finalScorePosition.Y, finalScoreSize, finalScoreColor);
+      Raylib.DrawText(finalScore,
+          (int)finalScorePosition.X,
+          (int)finalScorePosition.Y,
+          finalScoreSize,
+          finalScoreColor
+      );
 
       Raylib.DrawRectangleRec(goBackRec, goBackColor);
-      Raylib.DrawText(goBack, (int)goBackPosition.X, (int)goBackPosition.Y, goBackSize, goBackTextColor);
+      Raylib.DrawText(goBack,
+          (int)goBackPosition.X,
+          (int)goBackPosition.Y,
+          goBackSize,
+          goBackTextColor
+      );
     }
   }
 }

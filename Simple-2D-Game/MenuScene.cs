@@ -73,7 +73,7 @@ namespace Simple_2D_Game
       buttonColor = Raylib.GetColor(0x458588FF);
       buttonTextColor = Color.White;
       Vector2 mPos = Raylib.GetMousePosition();
-      if(intersectPoint(startButtonRec, mPos))
+      if(Utils.intersectPoint(startButtonRec, mPos))
       {
         buttonColor = Raylib.GetColor(0xd3869bFF);
         buttonTextColor = Raylib.GetColor(0x282828FF);
@@ -101,11 +101,6 @@ namespace Simple_2D_Game
     public void UnloadContent()
     { }
 
-    private bool intersectPoint(Rectangle r, Vector2 p)
-    {
-      return r.X < p.X && r.X + r.Width > p.X &&
-            r.Y < p.Y && r.Y + r.Height > p.Y;
-    }
 
   }
 }
