@@ -69,13 +69,19 @@ namespace Simple_2D_Game
         goBackTextColor = Raylib.GetColor(0x282828FF);
         if(Raylib.IsMouseButtonUp(MouseButton.Left) && stateClick)
         {
+          Globals.enemy_points = 0;
+          Globals.player_points = 0;
           manager.RemoveScene();
         }
       }
       stateClick = Raylib.IsMouseButtonDown(MouseButton.Left);
 
       if(Raylib.IsKeyPressed(KeyboardKey.Q))
-      { manager.RemoveScene(); }
+      {
+          Globals.enemy_points = 0;
+          Globals.player_points = 0;
+          manager.RemoveScene();
+      }
     }
     public void Draw(float deltaTime)
     {
