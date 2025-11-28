@@ -17,7 +17,6 @@ public class TestScene : IScene
 
     public void Draw()
     {
-
     }
 
     public void DrawUI()

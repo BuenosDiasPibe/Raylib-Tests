@@ -1,3 +1,4 @@
+using Raylib_cs;
 namespace Network_Drawing_Test;
 
 public static class Graphics_Globals
@@ -17,5 +18,17 @@ public static class Colors // https://github.com/morhetz/gruvbox?tab=readme-ov-f
   public const uint Aqua       = 0x689d6aFF;
   public const uint Gray       = 0xa89984FF;
   public const uint Foreground = 0xebdbb2FF;
+  public static Color giveRandomColor()
+  {
+    List<uint> colors = new()
+    {
+      Red,
+      Green,
+      Yellow,
+      Purple
+    };
+    Random r = new();
+    return Raylib.GetColor(colors[r.Next(colors.Count)]);
+  }
 }
 
