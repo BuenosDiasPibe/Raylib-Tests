@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/clumpl/Documentos/Programacion/Raylib-Tests/Simple-2D-Game/Simple-2D-Game.csproj": {}
+    "/home/clumpl/Documentos/Raylib-Test/Simple-2D-Game/Simple-2D-Game.csproj": {}
   },
   "projects": {
-    "/home/clumpl/Documentos/Programacion/Raylib-Tests/Simple-2D-Game/Simple-2D-Game.csproj": {
+    "/home/clumpl/Documentos/Raylib-Test/Simple-2D-Game/Simple-2D-Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/clumpl/Documentos/Programacion/Raylib-Tests/Simple-2D-Game/Simple-2D-Game.csproj",
+        "projectUniqueName": "/home/clumpl/Documentos/Raylib-Test/Simple-2D-Game/Simple-2D-Game.csproj",
         "projectName": "Simple-2D-Game",
-        "projectPath": "/home/clumpl/Documentos/Programacion/Raylib-Tests/Simple-2D-Game/Simple-2D-Game.csproj",
+        "projectPath": "/home/clumpl/Documentos/Raylib-Test/Simple-2D-Game/Simple-2D-Game.csproj",
         "packagesPath": "/home/clumpl/.nuget/packages/",
-        "outputPath": "/home/clumpl/Documentos/Programacion/Raylib-Tests/Simple-2D-Game/obj/",
+        "outputPath": "/home/clumpl/Documentos/Raylib-Test/Simple-2D-Game/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/clumpl/.nuget/NuGet/NuGet.Config"

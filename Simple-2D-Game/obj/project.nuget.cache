@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3BL67IPEgdI=",
+  "dgSpecHash": "st/Ubj63bMQ=",
   "success": true,
-  "projectFilePath": "/home/clumpl/Documentos/Programacion/Raylib-Tests/Simple-2D-Game/Simple-2D-Game.csproj",
+  "projectFilePath": "/home/clumpl/Documentos/Raylib-Test/Simple-2D-Game/Simple-2D-Game.csproj",
   "expectedPackageFiles": [
     "/home/clumpl/.nuget/packages/raylib-cs/7.0.2/raylib-cs.7.0.2.nupkg.sha512",
     "/home/clumpl/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.9/microsoft.aspnetcore.app.ref.9.0.9.nupkg.sha512"
