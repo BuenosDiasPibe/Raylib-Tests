@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Network-Drawing-Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+497c3040061b647d39c1d0e5c1d1e2ca3bebe552")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76b2bca2719fc2ca870bec45482bf3957f70ac89")]
 [assembly: System.Reflection.AssemblyProductAttribute("Network-Drawing-Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Network-Drawing-Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

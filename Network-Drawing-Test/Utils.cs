@@ -31,4 +31,3 @@ public static class Colors // https://github.com/morhetz/gruvbox?tab=readme-ov-f
     return Raylib.GetColor(colors[r.Next(colors.Count)]);
   }
 }
-
